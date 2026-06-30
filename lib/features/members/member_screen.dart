@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../models/member.dart';
-import '../services/member_service.dart';
-import 'add_member_screen.dart';
-import 'member_detail_screen.dart';
+import '../../models/member.dart';
+import '../../services/member_service.dart';
+
+import '../../screens/add_member_screen.dart';
+
+import 'member_body.dart';
 
 class MembersScreen extends StatefulWidget {
   const MembersScreen({super.key});
@@ -31,16 +33,6 @@ class _MembersScreenState
       final data =
       await MemberService().getMembers();
 
-      debugPrint(
-        'MEMBERS COUNT = ${data.length}',
-      );
-
-      for (final m in data) {
-        debugPrint(
-          '${m.firstName} ${m.lastName} - ${m.phone}',
-        );
-      }
-
       if (!mounted) return;
 
       setState(() {
@@ -49,7 +41,10 @@ class _MembersScreenState
       });
 
     } catch (e) {
-      debugPrint('MEMBERS ERROR: $e');
+
+      debugPrint(
+        "LOAD MEMBERS ERROR : $e",
+      );
 
       if (!mounted) return;
 
@@ -59,105 +54,47 @@ class _MembersScreenState
     }
   }
 
-  Color getStatusColor(String status) {
-    switch (status.toLowerCase()) {
-      case 'active':
-        return Colors.green;
+  Future<void> addMember() async {
 
-      case 'expired':
-        return Colors.red;
+    final result =
+    await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) =>
+        const AddMemberScreen(),
+      ),
+    );
 
-      default:
-        return Colors.orange;
+    if (result == true) {
+      await loadMembers();
     }
   }
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
+
       appBar: AppBar(
-        title: const Text('Members'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.add),
-            onPressed: () async {
-
-              final result =
-              await Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) =>
-                  const AddMemberScreen(),
-                ),
-              );
-
-              if (result == true) {
-                loadMembers();
-              }
-            },
-          ),
-        ],
+        title: const Text(
+          "Members",
+        ),
       ),
-      body: isLoading
-          ? const Center(
-        child:
-        CircularProgressIndicator(),
-      )
-          : ListView.builder(
-        itemCount: members.length,
-        itemBuilder:
-            (context, index) {
 
-          final member =
-          members[index];
+      floatingActionButton:
+      FloatingActionButton.extended(
+        onPressed: addMember,
+        icon: const Icon(Icons.add),
+        label: const Text("Add Member"),
+      ),
 
-          return Card(
-            margin:
-            const EdgeInsets.all(
-              10,
-            ),
-            child: ListTile(
-
-              onTap: () async {
-
-                final result =
-                await Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) =>
-                        MemberDetailScreen(
-                          member: member,
-                        ),
-                  ),
-                );
-
-                if (result == true) {
-                  loadMembers();
-                }
-              },
-
-              title: Text(
-                '${member.firstName} ${member.lastName}',
-              ),
-
-              subtitle: Text(
-                member.phone,
-              ),
-
-              trailing: Text(
-                member.status,
-                style: TextStyle(
-                  color:
-                  getStatusColor(
-                    member.status,
-                  ),
-                  fontWeight:
-                  FontWeight.bold,
-                ),
-              ),
-            ),
-          );
-        },
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: MemberBody(
+          members: members,
+          isLoading: isLoading,
+          onRefresh: loadMembers,
+        ),
       ),
     );
   }

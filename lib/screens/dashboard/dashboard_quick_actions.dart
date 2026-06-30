@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import '../../theme/app_colors.dart';
 import '../../widgets/dashboard_action_card.dart';
 
-import '../member_screen.dart';
+import '../../features/members/member_screen.dart';
+import '../../features/renewals/renewals_screen.dart';
 import '../plans_screen.dart';
 
 class DashboardQuickActions extends StatelessWidget {
@@ -50,15 +51,14 @@ class DashboardQuickActions extends StatelessWidget {
 
         DashboardActionCard(
           title: 'Renewals',
-          subtitle: 'Coming in Sprint 2',
+          subtitle: 'Track and process expiring memberships',
           icon: Icons.autorenew_rounded,
           color: Colors.orange,
           onTap: () {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text(
-                  'Renewals module coming soon 🚀',
-                ),
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => const RenewalsScreen(),
               ),
             );
           },

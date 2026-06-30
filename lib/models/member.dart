@@ -12,6 +12,7 @@ class Member {
   final String? startDate;
   final String? expiryDate;
   final int? membershipPlanId;
+  final String? membershipPlanName;
 
   Member({
     required this.id,
@@ -20,6 +21,7 @@ class Member {
     required this.phone,
     required this.status,
     required this.membershipPlanId,
+    this.membershipPlanName,
     this.email,
     this.gender,
     this.address,
@@ -44,6 +46,7 @@ class Member {
       startDate: json['start_date'],
       expiryDate: json['expiry_date'],
       membershipPlanId: json['membership_plan_id'] as int?,
+      membershipPlanName: json['membership_plan_name'],
     );
   }
 }

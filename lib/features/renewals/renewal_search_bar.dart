@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class MemberSearchBar extends StatelessWidget {
+class RenewalSearchBar extends StatelessWidget {
   final TextEditingController controller;
   final ValueChanged<String>? onChanged;
 
-  const MemberSearchBar({
+  const RenewalSearchBar({
     super.key,
     required this.controller,
     this.onChanged,
@@ -16,7 +16,7 @@ class MemberSearchBar extends StatelessWidget {
       controller: controller,
       onChanged: onChanged,
       decoration: InputDecoration(
-        hintText: "Search members...",
+        hintText: "Search by name or phone...",
 
         prefixIcon: const Icon(
           Icons.search_rounded,

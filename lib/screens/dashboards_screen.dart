@@ -10,7 +10,7 @@ import '../widgets/dashboard_action_card.dart';
 import '../widgets/section_title.dart';
 import '../widgets/stat_card.dart';
 
-import 'member_screen.dart';
+import '../features/members/member_screen.dart';
 import 'plans_screen.dart';
 
 class DashboardScreen extends StatefulWidget {

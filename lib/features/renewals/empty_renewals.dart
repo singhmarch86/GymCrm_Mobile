@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class EmptyMemberState extends StatelessWidget {
-  const EmptyMemberState({super.key});
+class EmptyRenewals extends StatelessWidget {
+  const EmptyRenewals({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class EmptyMemberState extends StatelessWidget {
           children: [
 
             Icon(
-              Icons.groups_outlined,
+              Icons.autorenew_rounded,
               size: 80,
               color: Colors.grey.shade400,
             ),
@@ -23,7 +23,7 @@ class EmptyMemberState extends StatelessWidget {
             const SizedBox(height: 20),
 
             const Text(
-              "No Members Found",
+              "No Renewals Due",
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
@@ -33,7 +33,7 @@ class EmptyMemberState extends StatelessWidget {
             const SizedBox(height: 12),
 
             Text(
-              "Start by adding your first gym member.",
+              "Members with upcoming or expired memberships will show up here.",
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.grey.shade600,
