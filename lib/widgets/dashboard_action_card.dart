@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 
 import '../theme/app_colors.dart';
-import '../theme/app_text_styles.dart';
 import 'app_card.dart';
 
 class DashboardActionCard extends StatelessWidget {
-  final IconData icon;
   final String title;
   final String subtitle;
-  final Color color;
+  final IconData icon;
   final VoidCallback onTap;
+
+  final Color color;
 
   const DashboardActionCard({
     super.key,
-    required this.icon,
     required this.title,
     required this.subtitle,
-    required this.color,
+    required this.icon,
     required this.onTap,
+    required this.color,
   });
 
   @override
@@ -27,20 +27,19 @@ class DashboardActionCard extends StatelessWidget {
       child: Row(
         children: [
           Container(
-            width: 58,
-            height: 58,
+            width: 52,
+            height: 52,
             decoration: BoxDecoration(
               color: color.withValues(alpha: 0.12),
-              borderRadius: BorderRadius.circular(14),
+              borderRadius: BorderRadius.circular(16),
             ),
             child: Icon(
               icon,
               color: color,
-              size: 30,
             ),
           ),
 
-          const SizedBox(width: 18),
+          const SizedBox(width: 16),
 
           Expanded(
             child: Column(
@@ -49,30 +48,29 @@ class DashboardActionCard extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: AppTextStyles.cardTitle,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 17,
+                  ),
                 ),
 
-                const SizedBox(height: 6),
+                const SizedBox(height: 4),
 
                 Text(
                   subtitle,
-                  style: AppTextStyles.caption,
+                  style: TextStyle(
+                    color: Colors.grey.shade600,
+                    fontSize: 13,
+                  ),
                 ),
               ],
             ),
           ),
 
-          Container(
-            width: 42,
-            height: 42,
-            decoration: BoxDecoration(
-              color: Colors.grey.shade100,
-              shape: BoxShape.circle,
-            ),
-            child: const Icon(
-              Icons.arrow_forward_ios_rounded,
-              size: 18,
-            ),
+          const Icon(
+            Icons.arrow_forward_ios_rounded,
+            size: 18,
+            color: AppColors.primary,
           ),
         ],
       ),
